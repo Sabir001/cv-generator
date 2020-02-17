@@ -9,7 +9,6 @@ import {
   BodyContainer
 } from "./styles/HomePageStyle";
 import logo from "./logo.svg";
-import "./App.css";
 
 const GlobalStyle = createGlobalStyle`
  body {
