@@ -6,7 +6,8 @@ import {
   AppHeader,
   AppHeaderCenter,
   AppLogo,
-  AppTitle
+  AppTitle,
+  BodyContainer
 } from "./styles/HomePageStyle";
 import logo from "./logo.svg";
 
@@ -33,7 +34,9 @@ function App() {
           </AppHeaderCenter>
         </AppHeader>
 
-        <CVContainer />
+        <BodyContainer>
+          <CVContainer />
+        </BodyContainer>
       </AppContainer>
     </React.Fragment>
   );
