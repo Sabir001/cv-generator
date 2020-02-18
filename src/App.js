@@ -1,12 +1,12 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import CVContainer from "./CVContainer";
 import {
   AppContainer,
   AppHeader,
   AppHeaderCenter,
   AppLogo,
-  AppTitle,
-  BodyContainer
+  AppTitle
 } from "./styles/HomePageStyle";
 import logo from "./logo.svg";
 
@@ -33,9 +33,7 @@ function App() {
           </AppHeaderCenter>
         </AppHeader>
 
-        <BodyContainer>
-          <p>Open Source CV Generator</p>
-        </BodyContainer>
+        <CVContainer />
       </AppContainer>
     </React.Fragment>
   );

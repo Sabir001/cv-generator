@@ -1,11 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const GeneratorButton = styled.button`
-  padding: 1em;
-`;
-
-const Container = styled.div``;
+import { Container, GeneratorButton } from "./styles/CVContainterStyle";
 
 const CVContainer = () => {
   return (
