@@ -1,14 +1,44 @@
-import React from 'react';
-import LandingMain from './landing-page/main';
-import './assets/css/App.css';
-import CreateForm from './components/create/createForm';
-import Templates from './components/templates/templates';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import CVContainer from "./CVContainer";
+import {
+  AppContainer,
+  AppHeader,
+  AppHeaderCenter,
+  AppLogo,
+  AppTitle,
+  BodyContainer
+} from "./styles/HomePageStyle";
+import logo from "./logo.svg";
+
+const GlobalStyle = createGlobalStyle`
+ body {
+   margin: 0;
+   padding: 0;
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+`;
 
 function App() {
   return (
-    <div className="app" >
-      <LandingMain />      
-    </div>
+    <React.Fragment>
+      <GlobalStyle />
+      <AppContainer>
+        <AppHeader>
+          <AppHeaderCenter>
+            <AppLogo src={logo} alt="logo" />
+            <AppTitle>CV Generator</AppTitle>
+          </AppHeaderCenter>
+        </AppHeader>
+
+        <BodyContainer>
+          <CVContainer />
+        </BodyContainer>
+      </AppContainer>
+    </React.Fragment>
   );
 }
 
