@@ -1,6 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import CVContainer from "./CVContainer";
+import SimpleForm from './components/SimpleForm'
 import {
   AppContainer,
   AppHeader,
@@ -33,7 +34,7 @@ function App() {
             <AppTitle>CV Generator</AppTitle>
           </AppHeaderCenter>
         </AppHeader>
-
+        <SimpleForm />
         <BodyContainer>
           <CVContainer />
         </BodyContainer>
