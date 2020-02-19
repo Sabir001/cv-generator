@@ -1,15 +1,15 @@
 import React from "react";
 import { GeneratorButton } from "./styles/CVContainterStyle";
 
-const CVBody = props => (
+const CVBody = ({handleClick, cvGenerated}) => (
   <>
     <GeneratorButton
-      onClick={() => props.handleClick()}
-      disabled={props.cvGenerated}
+      onClick={() => handleClick()}
+      disabled={cvGenerated}
     >
-      {props.cvGenerated ? "Done" : "Generate CV"}
+      {cvGenerated ? "Done" : "Generate CV"}
     </GeneratorButton>
-    {props.cvGenerated && <p>CV Generated</p>}
+    {cvGenerated && <p>CV Generated</p>}
   </>
 );
 
