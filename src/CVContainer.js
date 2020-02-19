@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Container, GeneratorButton } from "./styles/CVContainterStyle";
+import { Container } from "./styles/CVContainterStyle";
+import CVBody from './CVBody';
 
 const CVContainer = () => {
   const [cvGenerated, setCvGenerated] = useState(false);
@@ -10,10 +11,7 @@ const CVContainer = () => {
 
   return (
     <Container>
-      <GeneratorButton onClick={() => handleClick()} disabled={cvGenerated}>
-        {cvGenerated ? "Done" : "Generate CV"}
-      </GeneratorButton>
-      {cvGenerated && <p>CV Generated</p>}
+      <CVBody cvGenerated={cvGenerated} handleClick={handleClick} />
     </Container>
   );
 };

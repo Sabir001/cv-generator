@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import CVContainer from "./CVContainer";
+// import CVContainer from "./CVContainer";
 import {
   AppContainer,
   AppHeader,
@@ -10,6 +10,11 @@ import {
   BodyContainer
 } from "./styles/HomePageStyle";
 import logo from "./logo.svg";
+import PersonalInfo from './PersonalInfo';
+
+// name
+// email
+// phone number
 
 const GlobalStyle = createGlobalStyle`
  body {
@@ -35,7 +40,7 @@ function App() {
         </AppHeader>
 
         <BodyContainer>
-          <CVContainer />
+          <PersonalInfo />
         </BodyContainer>
       </AppContainer>
     </React.Fragment>
