@@ -3,9 +3,10 @@ import bgBanner from '../assets/images/cv-banner.jpg';
 import '../assets/css/landing-page.css';
 import CreateCVButton from './button';
 
-function LandingMain() {
-    const createButton = {text: 'Create Now', link: '#'};
+function LandingMain({handleClick, createCv}) {
+    const createButton = {text: 'Create Now', link: '#', createCv: createCv, handleClick: handleClick};
     const templateButton = {text: 'Templates', link: '#'};
+    console.log("main", createCv);
     return (
       <div className="full-screen" style={{backgroundImage: "url(" + bgBanner + ")"}}>
         <div className="content">
@@ -13,7 +14,7 @@ function LandingMain() {
 
           <div className="buttons">
             <CreateCVButton {...createButton} />
-            <CreateCVButton {...templateButton} />
+            {/* <CreateCVButton {...templateButton} /> */}
           </div>
 
         </div>

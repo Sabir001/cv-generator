@@ -1,8 +1,11 @@
 import React from 'react';
 
-function CreateCVButton({text, link}) {
+function CreateCVButton({text, link, handleClick, createCv}) {
+    console.log("createCv", createCv);
     return (
-        <a className="button-line" href={link}>{text}</a>
+        <>
+            <button onClick={() => handleClick()} className="button-line" href={link}>{text}</button>            
+        </>
     );
   }
   

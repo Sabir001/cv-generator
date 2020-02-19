@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import CVContainer from "./CVContainer";
+import LandingMain from './landing-page/main';
+import CVPrimaryForm from './cv-form/primary-info';
 import {
   AppContainer,
   AppHeader,
@@ -23,6 +25,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [createCv, setcreateCv] = useState(false);
+  const handleClick = () => {    
+    setcreateCv(true);
+  };
+  
+
   return (
     <React.Fragment>
       <GlobalStyle />
@@ -35,7 +43,17 @@ function App() {
         </AppHeader>
 
         <BodyContainer>
-          <CVContainer />
+
+          <CVPrimaryForm />
+
+          {/* <CVContainer /> */}
+
+          {!createCv && <LandingMain handleClick={handleClick} createCv={createCv} />}
+          
+          
+
+
+
         </BodyContainer>
       </AppContainer>
     </React.Fragment>
