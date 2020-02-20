@@ -9,6 +9,8 @@ import {
   BodyContainer
 } from "./styles/HomePageStyle";
 import logo from "./logo.svg";
+import CVContainer from './CVContainer';
+import PersonalInfo from './PersonalInfo';
 
 const GlobalStyle = createGlobalStyle`
  body {
@@ -34,6 +36,7 @@ function App() {
         </AppHeader>
 
         <BodyContainer>
+          <PersonalInfo />
           <p>Open Source CV Generator</p>
         </BodyContainer>
       </AppContainer>

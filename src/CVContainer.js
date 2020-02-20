@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 const GeneratorButton = styled.button`
@@ -8,11 +8,21 @@ const GeneratorButton = styled.button`
 const Container = styled.div``;
 
 const CVContainer = () => {
-  return (
-    <Container>
-      <GeneratorButton>Generate CV</GeneratorButton>
-    </Container>
-  );
+    const [cvGenerated, setCvGenerated] = useState(false);
+
+    const handleChange = () => {
+        setCvGenerated(true);
+    };
+
+    return (
+        <Container>
+            <GeneratorButton
+                onClick={() => handleChange()}
+                disabled = { cvGenerated === true }> { cvGenerated ? 'Done' : 'Generate CV' }
+            </GeneratorButton>
+            {cvGenerated && <p>CV generated !!</p>}
+        </Container>
+    );
 };
 
 export default CVContainer;
