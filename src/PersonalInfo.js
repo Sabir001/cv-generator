@@ -1,41 +1,17 @@
 import React, { useState } from "react";
 
-const PersonalInfo = () => {
-  const [name, setName] = useState(undefined);
-  const [email, setEmail] = useState(undefined);
-  const [phone, setPhone] = useState(undefined);
-  const [importantLinks, setImportantLinks] = useState([{ name: "", url: "" }]);
-
-  const changeLinkName = (e, index) => {
-    let newLinks = [...importantLinks];
-    newLinks.map((item, i) => {
-      console.log(index, i);
-      if (i === index) {
-        item.name = e.target.value;
-      }
-    });
-    setImportantLinks(newLinks);
-  };
-
-  const changeLinkUrl = (e, index) => {
-    let newLinks = [...importantLinks];
-    newLinks.map((item, i) => {
-      if (i === index) {
-        item.url = e.target.value;
-      }
-    });
-    setImportantLinks(newLinks);
-  };
-
-  const addLink = () => {
-    setImportantLinks([...importantLinks, { name: "", url: "" }]);
-  };
-
-  const deleteLink = index => {
-    let newLinks = importantLinks.filter((_, i) => i !== index);
-    setImportantLinks(newLinks);
-  };
-
+const PersonalInfo = ({
+  name,
+  setName,
+  email,
+  setEmail,
+  phone,
+  setPhone,
+  importantLinks,
+  changeLinks,
+  addLink,
+  deleteLink
+}) => {
   return (
     <div>
       <label>Name: </label>
@@ -68,13 +44,13 @@ const PersonalInfo = () => {
           <input
             type="text"
             value={item.name}
-            onChange={e => changeLinkName(e, index)}
+            onChange={e => changeLinks(e, index, "name")}
           />
           <br />
           <input
             type="text"
             value={item.url}
-            onChange={e => changeLinkUrl(e, index)}
+            onChange={e => changeLinks(e, index, "url")}
           />
           <button onClick={() => deleteLink(index)}>X</button>
           {index !== importantLinks.length - 1 && <br />}
