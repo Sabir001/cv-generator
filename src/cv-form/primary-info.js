@@ -4,28 +4,47 @@ const CVPrimaryForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [link, setLink] = useState('');
-    // const [links, setLink] = useState([{name: '', url: ''}]);
-    const [addLink, setAddLink] = useState(false);
+    const [links, setLinks] = useState([{name: "", url: ""}]);
     const [submit, setSubmit] = useState(false);
 
-    const nameChange = (event) => {
+    const handleName = (event) => {
         setName(event.target.value);
     };
 
-    const emailChange = (event) => {
+    const handleEmail = (event) => {
         setEmail(event.target.value);
     };
 
-    const phoneChange = (event) => {
+    const handlePhone = (event) => {
         setPhone(event.target.value);
     };
 
-    const linkChange = (event) => {
-        setLink(event.target.value);
+    const handleLinks = (event, index, type) => {
+        let newLink = [...links];
+        newLink.map((item, i) => {
+            if (i === index) {
+                if (type === "name") {
+                    item.name = event.target.value;
+                }
+                if (type === "url") {
+                    item.url = event.target.value;
+                }
+            }
+        });
+        setLinks(newLink);
     };
 
-    const formSubmit = (e) => {
+    const addLink = (e) => {
+        e.preventDefault();
+        setLinks([...links, { name: "", url: "" }]);
+    };
+
+    const deleteLink = (index) => {
+        let newLinks = links.filter((_, i) => i !== index);
+        setLinks(newLinks);
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         setSubmit(true);
     };
@@ -33,42 +52,63 @@ const CVPrimaryForm = () => {
     return (
         <div>
             <form>
-                <p>
+                <div>
                     <label for="name">Name</label>
-                    <input type="text" name="name" value={name} onChange={event => nameChange(event)} placeholder="Your Name" /><br/>
-                </p>
+                    <input type="text" name="name" value={name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
+                </div>
 
-                <p>
+                <div>
                     <label for="email">Email</label>
-                    <input type="email" name="email" value={email} onChange={event => emailChange(event)} placeholder="Your Email" /><br/>
-                </p>
+                    <input type="email" name="email" value={email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
+                </div>
 
-                <p>
+                <div>
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" value={phone} onChange={event => phoneChange(event)} placeholder="Your Phone Number" /><br/>
-                </p>
-                
-                <p>
-                    <label for="link">Important Links</label>
-                    <input type="text" name="link" value={link} onChange={event => linkChange(event)} placeholder="Give URL" /><br/>
-                </p>
+                    <input type="text" name="phone" value={phone} onChange={event => handlePhone(event)} placeholder="Your Phone Number" /><br/>
+                </div>
 
-                <p>
+                <div>
                     <label for="link">Important Links</label>
-                    
-                    <input type="text" name="link_name" value={link} onChange={event => linkChange(event)} placeholder="Give URL" /><br/>
-                    {/* <input type="text" name="link_url" value={link} onChange={event => linkChange(event)} placeholder="Give URL" /><br/> */}
-                </p>
+
+                    {links.map((link, index) => (
+                        <React.Fragment key={index}>
+                        <div>
+                            <input type="text" value={link.name} onChange={event => handleLinks(event, index, "name")} />
+                            <input type="text" value={link.url} onChange={event => handleLinks(event, index, "url")} />
+                            <button onClick={()=>deleteLink(index)}>X</button>
+                        </div>
+                        </React.Fragment>
+                    ))}
+                    <button onClick={ addLink }>+</button>
+                </div>
                 
-                <button className="button" onClick={formSubmit}>Submit</button>
+                <button className="button" onClick={handleSubmit}>Submit</button>
             </form>
 
             {submit && 
                 <div>
-                    <p>Name: {name}</p>
-                    <p>Email: {email}</p>
-                    <p>Phone: {phone}</p>
-                    <p>Link: {link}</p>
+                    { name && 
+                        <p>Name: {name}</p>
+                    }
+
+                    { email && 
+                        <p>Email: {email}</p>
+                    }
+
+                    { phone && 
+                       <p>Phone: {phone}</p>
+                    }
+
+                    { (links.length > 0) &&
+                        <p>Important Links:<br/>
+                            {links.map((link) => (
+                                <span>
+                                    <strong> {link.name} </strong>: {link.url}
+                                </span>
+                            ))}
+                        </p>
+                        
+                    }
                 </div>
             }
         </div>
