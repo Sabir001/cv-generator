@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
-import CVContainer from "./CVContainer";
-import LandingMain from './landing-page/main';
-import CVPrimaryForm from './cv-form/primary-info';
+import LandingMain from './components/landing-page/main';
+import CreateCVForm from './components/create-cv-form/create-form';
 import {
   AppContainer,
   AppHeader,
@@ -11,7 +10,7 @@ import {
   AppTitle,
   BodyContainer
 } from "./styles/HomePageStyle";
-import logo from "./logo.svg";
+import logo from "./assets/images/logo.svg";
 
 const GlobalStyle = createGlobalStyle`
  body {
@@ -25,9 +24,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [createCv, setcreateCv] = useState(false);
-  const handleClick = () => {    
-    setcreateCv(true);
+  const [createCv, setcreateCv] = useState({create: false, template: false});
+  const handleCreateCV = () => {    
+    setcreateCv({create: true});
+  };
+
+  const handleTemplate = () => {    
+    setcreateCv({template: true});
   };
   
 
@@ -41,19 +44,9 @@ function App() {
             <AppTitle>CV Generator</AppTitle>
           </AppHeaderCenter>
         </AppHeader>
-
         <BodyContainer>
-
-          <CVPrimaryForm />
-
-          {/* <CVContainer /> */}
-
-          {!createCv && <LandingMain handleClick={handleClick} createCv={createCv} />}
-          
-          
-
-
-
+          {createCv.create && <CreateCVForm/>}
+          {!createCv.create && <LandingMain handleCreateCV={handleCreateCV} handleTemplate={handleTemplate} createCv={createCv} />}
         </BodyContainer>
       </AppContainer>
     </React.Fragment>

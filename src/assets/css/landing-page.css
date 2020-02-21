@@ -12,8 +12,6 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
-    /* works with row or column */
-    
     flex-direction: column;
     -webkit-align-items: center;
     align-items: center;

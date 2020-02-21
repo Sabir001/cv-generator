@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CVPrimaryForm = () => {
+const PrimaryForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -50,40 +50,44 @@ const CVPrimaryForm = () => {
     };
     
     return (
-        <div>
-            <form>
-                <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" value={name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
-                </div>
+        <div className="personal-info">
+            <div>
+                <label name="name">Name</label>
+                <input type="text" name="name" value={name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
+            </div>
 
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" name="email" value={email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
-                </div>
+            <div>
+                <label name="email">Email</label>
+                <input type="email" name="email" value={email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
+            </div>
 
-                <div>
-                    <label for="phone">Phone</label>
-                    <input type="text" name="phone" value={phone} onChange={event => handlePhone(event)} placeholder="Your Phone Number" /><br/>
-                </div>
+            <div>
+                <label name="phone">Phone</label>
+                <input type="text" name="phone" value={phone} onChange={event => handlePhone(event)} placeholder="Your Phone Number" /><br/>
+            </div>
 
-                <div>
-                    <label for="link">Important Links</label>
+            <div>
+                <label name="link">Important Links</label>
 
-                    {links.map((link, index) => (
-                        <React.Fragment key={index}>
-                        <div>
-                            <input type="text" value={link.name} onChange={event => handleLinks(event, index, "name")} />
-                            <input type="text" value={link.url} onChange={event => handleLinks(event, index, "url")} />
-                            <button onClick={()=>deleteLink(index)}>X</button>
+                {links.map((link, index) => (
+                    <React.Fragment key={index}>
+                    <div className="important_links">
+                        <div className="name">
+                            <label name="linkName">Name</label>
+                            <input type="text" value={link.name} onChange={event => handleLinks(event, index, "name")} placeholder="Facebook" />
                         </div>
-                        </React.Fragment>
-                    ))}
-                    <button onClick={ addLink }>+</button>
-                </div>
-                
-                <button className="button" onClick={handleSubmit}>Submit</button>
-            </form>
+                        <div className="name">
+                            <label name="linkValue">URL</label>
+                            <input type="text" value={link.url} onChange={event => handleLinks(event, index, "url")} placeholder="https://www.facebook.com" />
+                        </div>
+                        <button onClick={()=>deleteLink(index)}>X</button>
+                    </div>
+                    </React.Fragment>
+                ))}
+                <button onClick={ addLink }>+</button>
+            </div>
+            
+            <button className="button" onClick={handleSubmit}>Submit</button>
 
             {submit && 
                 <div>
@@ -115,4 +119,4 @@ const CVPrimaryForm = () => {
     );
 };
 
-export default CVPrimaryForm;
+export default PrimaryForm;
