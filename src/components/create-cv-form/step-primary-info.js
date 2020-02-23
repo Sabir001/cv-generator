@@ -45,7 +45,6 @@ const PrimaryForm = () => {
     //Length Validation Check
     const lengthCheck = (value, minlength, maxLength) => {
         if (value.length <= minlength && value.length <= maxLength ) {
-            console.log("ddd");
             return false;
         }
         return true;
@@ -114,18 +113,34 @@ const PrimaryForm = () => {
         }        
     };
     
-    console.log("Name ", name);
-    console.log("Email ", email);
+    // console.log("Name ", name);
+    // console.log("Email ", email);
     return (
         <div className="personal-info">
             <div>
                 <label name="name">Name</label>
                 <input type="text" name="name" value={name.name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
+                {name.error.length > 0 && 
+                    <div className="errors">
+                        <ul>
+                            {
+                                name.error.map((error) => <li> {error} </li>)
+                            }
+                        </ul>                        
+                    </div>
+                }
             </div>
 
             <div>
                 <label name="email">Email</label>
                 <input type="email" name="email" value={email.email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
+                <div className="errors">
+                        <ul>
+                            {
+                                email.error.map((error) => <li> {error} </li>)
+                            }
+                        </ul>                        
+                    </div>
             </div>
 
             <div>
@@ -154,7 +169,9 @@ const PrimaryForm = () => {
                 <button onClick={ addLink }>+</button>
             </div>
             
-            <button className="button" onClick={handleSubmit}>Submit</button>
+            <div className="submit_button">
+                <button className="button" onClick={handleSubmit}>Submit</button>
+            </div>
 
             {submit && 
                 <div>
