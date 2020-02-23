@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 
 const PrimaryForm = () => {
-    const [name, setName] = useState({name: '', error: [] });
-    const [email, setEmail] = useState({email: '', error: [] });
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [links, setLinks] = useState([{name: "", url: ""}]);
     const [submit, setSubmit] = useState(false);
+    const [errors, setErrors] = useState( { nameError: [], emailError: [], phoneError: [] } );
 
-    const handleName = (event) => {        
-        setName({name: event.target.value, error: {}});
+    const handleName = (event) => {      
+        setName(event.target.value);
     };
 
     const handleEmail = (event) => {
-        setEmail({email: event.target.value, error: {}});
+        setEmail(event.target.value);
     };
 
     const handlePhone = (event) => {
@@ -82,31 +83,39 @@ const PrimaryForm = () => {
 
         //Name Validation
         let nameError = [];
-        if ( !emptyCheck(name.name) ) {
+        if ( !emptyCheck(name) ) {
             submit = false;
             nameError = [...nameError, 'Name shouldn\'t be empty.'];
         }
-        if ( !lengthCheck(name.name, 4, 30) ) {
+        if ( !lengthCheck(name, 4, 30) ) {
             submit = false;
             nameError = [...nameError, 'Name should be minimum 4 and maximum 30 words.'];
         }
-        if ( !nameCheck(name.name) ) {
+        if ( !nameCheck(name) ) {
             submit = false;
             nameError = [...nameError, 'The name you provided is not valid.'];
         }
-        setName({name: name.name, error: nameError });
 
         //Email Validation
         let emailError = [];
-        if ( !emptyCheck(email.email) ) {
+        if ( !emptyCheck(email) ) {
             submit = false;
             emailError = [...emailError, 'Email shouldn\'t be empty.'];
         }
-        if ( !emailCheck(email.email) ) {
+        if ( !emailCheck(email) ) {
             submit = false;
             emailError = [...emailError, 'The Email you provided is not valid.'];
         }
-        setEmail({email: email.email, error: emailError });
+
+        //Phone Validation
+        let phoneError = [];
+        if ( !emptyCheck(phone) ) {
+            submit = false;
+            phoneError = [...phoneError, 'Phone Number shouldn\'t be empty.'];
+        }
+
+        //Set Errors
+        setErrors({ nameError: nameError, emailError: emailError, phoneError: phoneError });
 
         if (submit) {
             setSubmit(true);
@@ -117,38 +126,49 @@ const PrimaryForm = () => {
     // console.log("Email ", email);
     return (
         <div className="personal-info">
-            <div>
+            <div className="form-item">
                 <label name="name">Name</label>
-                <input type="text" name="name" value={name.name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
-                {name.error.length > 0 && 
+                <input type="text" name="name" value={name} onChange={event => handleName(event)} placeholder="Your Name" /><br/>
+                {errors.nameError.length > 0 && 
                     <div className="errors">
                         <ul>
                             {
-                                name.error.map((error) => <li> {error} </li>)
+                                errors.nameError.map((error) => <li> {error} </li>)
                             }
                         </ul>                        
                     </div>
                 }
             </div>
 
-            <div>
+            <div className="form-item">
                 <label name="email">Email</label>
-                <input type="email" name="email" value={email.email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
-                <div className="errors">
+                <input type="email" name="email" value={email} onChange={event => handleEmail(event)} placeholder="Your Email" /><br/>
+                {errors.emailError.length > 0 && 
+                    <div className="errors">
                         <ul>
                             {
-                                email.error.map((error) => <li> {error} </li>)
+                                errors.emailError.map((error) => <li> {error} </li>)
                             }
                         </ul>                        
                     </div>
+                }
             </div>
 
-            <div>
+            <div className="form-item">
                 <label name="phone">Phone</label>
                 <input type="text" name="phone" value={phone} onChange={event => handlePhone(event)} placeholder="Your Phone Number" /><br/>
+                {errors.phoneError.length > 0 && 
+                    <div className="errors">
+                        <ul>
+                            {
+                                errors.phoneError.map((error) => <li> {error} </li>)
+                            }
+                        </ul>                        
+                    </div>
+                }
             </div>
 
-            <div>
+            <div className="form-item">
                 <label name="link">Important Links</label>
 
                 {links.map((link, index) => (
@@ -166,7 +186,9 @@ const PrimaryForm = () => {
                     </div>
                     </React.Fragment>
                 ))}
-                <button onClick={ addLink }>+</button>
+                <div className="addlink">
+                    <button onClick={ addLink }>+</button>
+                </div>
             </div>
             
             <div className="submit_button">
@@ -176,11 +198,11 @@ const PrimaryForm = () => {
             {submit && 
                 <div>
                     { name && 
-                        <p>Name: {name.name}</p>
+                        <p>Name: {name}</p>
                     }
 
                     { email && 
-                        <p>Email: {email.email}</p>
+                        <p>Email: {email}</p>
                     }
 
                     { phone && 

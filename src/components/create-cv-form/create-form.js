@@ -9,6 +9,7 @@ import Projects from './step-projects';
 import CoCurricular from './step-co-curriculam';
 import References from './step-references';
 import '../../assets/css/multistep.css';
+import '../../assets/css/validation.css';
 
 const CreateCVForm = () => {
     const steps = [
@@ -21,9 +22,10 @@ const CreateCVForm = () => {
         {name: 'CoCurricular', component: <CoCurricular/>},
         {name: 'References', component: <References/>}
     ];
+
     return (
         <div className="cf-steps">
-            <MultiStep steps={steps}/>
+            <MultiStep steps={steps} />
         </div>
     )
 }

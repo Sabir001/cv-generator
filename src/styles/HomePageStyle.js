@@ -113,8 +113,9 @@ export const LandingButton = styled.div`
 
     &:hover {
       opacity: 1;
-      color: #6200ff;
-      border-color: #6200ff;
+      color: #000;
+      border-color: #000;
+      cursor: pointer;
     }
   }
 `;

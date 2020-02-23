@@ -47,6 +47,23 @@
     text-align: center;
     margin-right: 0;
 }
+
+.cf-steps .addlink {
+  text-align: left;
+  margin-left: 200px;
+}
+
+.cf-steps .addlink button {
+  font-size: 1em;
+  padding: 12px;
+  line-height: 1;
+  color: #42aa74;
+  text-transform: uppercase;
+  border-color: #42aa74;
+  text-align: center;
+  margin-right: 0;
+}
+
 /*--------------------------------------------------------*/
 ol.progtrckr {
     margin: 0;
@@ -237,5 +254,5 @@ input,
 textarea,
 select,
 fieldset {
-  margin-bottom: 1.5rem; 
+  margin-bottom: .5em; 
 }
