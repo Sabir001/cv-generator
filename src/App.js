@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
-import CVContainer from "./CVContainer";
+import LandingMain from "./components/landing-page/main";
+import CreateCVForm from "./components/create-cv-form/create-form";
+import Test from "./test";
+import TestFunc from "./components/testFunc";
+
 import {
   AppContainer,
   AppHeader,
@@ -9,7 +13,7 @@ import {
   AppTitle,
   BodyContainer
 } from "./styles/HomePageStyle";
-import logo from "./logo.svg";
+import logo from "./assets/images/logo.svg";
 
 const GlobalStyle = createGlobalStyle`
  body {
@@ -23,6 +27,15 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [createCv, setcreateCv] = useState({ create: false, template: false });
+  const handleCreateCV = () => {
+    setcreateCv({ create: true });
+  };
+
+  const handleTemplate = () => {
+    setcreateCv({ template: true });
+  };
+
   return (
     <React.Fragment>
       <GlobalStyle />
@@ -33,9 +46,15 @@ function App() {
             <AppTitle>CV Generator</AppTitle>
           </AppHeaderCenter>
         </AppHeader>
-
         <BodyContainer>
-          <CVContainer />
+          {createCv.create && <CreateCVForm />}
+          {!createCv.create && (
+            <LandingMain
+              handleCreateCV={handleCreateCV}
+              handleTemplate={handleTemplate}
+              createCv={createCv}
+            />
+          )}
         </BodyContainer>
       </AppContainer>
     </React.Fragment>
