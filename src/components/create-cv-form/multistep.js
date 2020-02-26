@@ -20,10 +20,10 @@ function _iterableToArrayLimit(arr, i) {
     return;
   }
 
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
+  let _arr = [];
+  let _n = true;
+  let _d = false;
+  let _e = undefined;
 
   try {
     for (
@@ -53,10 +53,10 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance");
 }
 
-var getNavStyles = function getNavStyles(indx, length) {
-  var styles = [];
+let getNavStyles = function getNavStyles(indx, length) {
+  let styles = [];
 
-  for (var i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     if (i < indx) {
       styles.push("done");
     } else if (i === indx) {
@@ -69,7 +69,7 @@ var getNavStyles = function getNavStyles(indx, length) {
   return styles;
 };
 
-var getButtonsState = function getButtonsState(indx, length) {
+let getButtonsState = function getButtonsState(indx, length) {
   if (indx > 0 && indx < length - 1) {
     return {
       showPreviousBtn: true,
@@ -89,17 +89,17 @@ var getButtonsState = function getButtonsState(indx, length) {
 };
 
 function MultiStep(props) {
-  var _useState = useState(getNavStyles(0, props.steps.length)),
+  let _useState = useState(getNavStyles(0, props.steps.length)),
     _useState2 = _slicedToArray(_useState, 2),
     stylesState = _useState2[0],
     setStyles = _useState2[1];
 
-  var _useState3 = useState(0),
+  let _useState3 = useState(0),
     _useState4 = _slicedToArray(_useState3, 2),
     compState = _useState4[0],
     setComp = _useState4[1];
 
-  var _useState5 = useState(getButtonsState(0, props.steps.length)),
+  let _useState5 = useState(getButtonsState(0, props.steps.length)),
     _useState6 = _slicedToArray(_useState5, 2),
     buttonsState = _useState6[0],
     setButtons = _useState6[1];
@@ -110,19 +110,19 @@ function MultiStep(props) {
     setButtons(getButtonsState(indx, props.steps.length));
   }
 
-  var next = function next() {
+  let next = function next() {
     return setStepState(compState + 1);
   };
 
-  var previous = function previous() {
+  let previous = function previous() {
     return setStepState(compState > 0 ? compState - 1 : compState);
   };
 
-  var handleKeyDown = function handleKeyDown(evt) {
+  let handleKeyDown = function handleKeyDown(evt) {
     return evt.which === 13 ? next(props.steps.length) : {};
   };
 
-  var handleOnClick = function handleOnClick(evt) {
+  let handleOnClick = function handleOnClick(evt) {
     if (
       evt.currentTarget.value === props.steps.length - 1 &&
       compState === props.steps.length - 1
@@ -133,7 +133,7 @@ function MultiStep(props) {
     }
   };
 
-  var renderSteps = function renderSteps() {
+  let renderSteps = function renderSteps() {
     return props.steps.map(function(s, i) {
       return (
         <li
