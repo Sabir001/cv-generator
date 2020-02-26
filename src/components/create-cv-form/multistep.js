@@ -135,71 +135,62 @@ function MultiStep(props) {
 
   var renderSteps = function renderSteps() {
     return props.steps.map(function(s, i) {
-      return React.createElement(
-        "li",
-        {
-          className: "progtrckr-" + stylesState[i],
-          onClick: handleOnClick,
-          key: i,
-          value: i
-        },
-        React.createElement("em", null, i + 1),
-        React.createElement("span", null, props.steps[i].name)
+      return (
+        <li
+          onClick={handleOnClick}
+          key={i}
+          value={i}
+          className={`progtrckr-${stylesState[i]}`}
+        >
+          <em>{i + 1}</em>
+          <span>{props.steps[i].name}</span>
+        </li>
       );
     });
   };
 
-  return React.createElement(
-    "div",
-    {
-      className: "container",
-      onKeyDown: handleKeyDown
-    },
-    React.createElement(
-      "ol",
-      {
-        className: "progtrckr"
-      },
-      renderSteps()
-    ),
-    props.steps[compState].component,
-    React.createElement(
-      "div",
-      {
-        className: "step-buttons",
-        style: props.showNavigation
-          ? {}
-          : {
-              display: "none"
-            }
-      },
-      React.createElement(
-        "button",
-        {
-          className: "previous",
-          style: buttonsState.showPreviousBtn
+  return (
+    <div className="container" onKeyDown={handleKeyDown}>
+      <ol className="progtrckr">{renderSteps()}</ol>
+      {props.steps[compState].component}
+      <div
+        className="step-buttons"
+        style={
+          props.showNavigation
             ? {}
             : {
                 display: "none"
-              },
-          onClick: previous
-        },
-        "Previous"
-      ),
-      React.createElement(
-        "button",
-        {
-          className: "next",
-          style: buttonsState.showNextBtn
-            ? {}
-            : {
-                display: "none"
-              },
-          onClick: next
-        },
-        "Next"
-      )
-    )
+              }
+        }
+      >
+        <button
+          className="previous"
+          style={
+            buttonsState.showPreviousBtn
+              ? {}
+              : {
+                  display: "none"
+                }
+          }
+          onClick={previous}
+        >
+          Previous
+        </button>
+        <button
+          className="next"
+          style={
+            buttonsState.showNextBtn
+              ? {}
+              : {
+                  display: "none"
+                }
+          }
+          onClick={next}
+        >
+          Next
+        </button>
+      </div>
+    </div>
   );
 }
 MultiStep.defaultProps = {
