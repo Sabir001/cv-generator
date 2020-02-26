@@ -1,13 +1,13 @@
 import React from "react";
-import MultiStep from "./multistep";
-import PrimaryForm from "./step-primary-info";
-import Objectives from "./step-objectives";
-import Education from "./step-education";
-import Experience from "./step-experience";
-import Skills from "./step-skills";
-import Projects from "./step-projects";
-import CoCurricular from "./step-co-curriculam";
-import References from "./step-references";
+import MultiStep from "./MultiStep";
+import PrimaryForm from "./steps/PrimaryForm";
+import Objectives from "./steps/Objectives";
+import Education from "./steps/Education";
+import Experience from "./steps/Experience";
+import Skills from "./steps/Skills";
+import Projects from "./steps/Projects";
+import CoCurricular from "./steps/CoCurricular";
+import References from "./steps/References";
 import "../../assets/css/multistep.css";
 import "../../assets/css/validation.css";
 

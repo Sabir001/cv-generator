@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import LandingMain from "./components/landing-page/main";
-import CreateCVForm from "./components/create-cv-form/create-form";
+import CreateCVForm from "./components/create-cv-form/CreateCVForm";
 
 import {
   AppContainer,
