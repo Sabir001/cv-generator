@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import LandingMain from './components/landing-page/main';
 import CreateCVForm from './components/create-cv-form/create-form';
-import Test from './test';
-import TestFunc from './components/testFunc';
+import Test from './components/practice/test';
+import TestFunc from './components/practice/testFunc';
 
 import {
   AppContainer,
@@ -51,10 +51,10 @@ function App() {
 
           {/* <Test /> */}
 
-          <TestFunc />
+          {/* <TestFunc /> */}
 
-          {/* {createCv.create && <CreateCVForm/>}
-          {!createCv.create && <LandingMain handleCreateCV={handleCreateCV} handleTemplate={handleTemplate} createCv={createCv} />} */}
+          {createCv.create && <CreateCVForm/>}
+          {!createCv.create && <LandingMain handleCreateCV={handleCreateCV} handleTemplate={handleTemplate} createCv={createCv} />}
         </BodyContainer>
       </AppContainer>
     </React.Fragment>
