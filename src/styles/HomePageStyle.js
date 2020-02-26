@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bgBanner from '../assets/images/cv-banner.jpg';
+import bgBanner from "../assets/images/cv-banner.jpg";
 
 export const AppContainer = styled.div`
   text-align: left;
@@ -85,7 +85,7 @@ export const LandingContent = styled.div`
 
 export const LandingHeader = styled.h1`
   color: #fff;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 800;
   font-size: 4em;
   letter-spacing: -2px;
@@ -95,7 +95,7 @@ export const LandingHeader = styled.h1`
 
 export const LandingButton = styled.div`
   button {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
@@ -104,10 +104,10 @@ export const LandingButton = styled.div`
     color: #fff;
     text-align: center;
     font-size: 1.4em;
-    opacity: .8;
+    opacity: 0.8;
     padding: 20px 40px;
     text-decoration: none;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
     margin: 0 15px;
     display: inline-block;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   LandingWrapper,
   LandingContent,
@@ -6,20 +6,31 @@ import {
   LandingButton
 } from "../../styles/HomePageStyle";
 
-function LandingMain({handleCreateCV, handleTemplate}) {
-    return (
-      <LandingWrapper>
-        <LandingContent>
-          <LandingHeader>CV Generator</LandingHeader>
+function LandingMain({ handleCreateCV, handleTemplate }) {
+  return (
+    <LandingWrapper>
+      <LandingContent>
+        <LandingHeader>CV Generator</LandingHeader>
 
-          <LandingButton>
-            <button onClick={() => handleCreateCV()} className="button-line" href="#">Create Now</button>
-            <button onClick={() => handleTemplate()} className="button-line" href="#">Templates</button>
-          </LandingButton>
+        <LandingButton>
+          <button
+            onClick={() => handleCreateCV()}
+            className="button-line"
+            href="#"
+          >
+            Create Now
+          </button>
+          <button
+            onClick={() => handleTemplate()}
+            className="button-line"
+            href="#"
+          >
+            Templates
+          </button>
+        </LandingButton>
+      </LandingContent>
+    </LandingWrapper>
+  );
+}
 
-        </LandingContent>
-      </LandingWrapper>
-    );
-  }
-  
-  export default LandingMain;
+export default LandingMain;

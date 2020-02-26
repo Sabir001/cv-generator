@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 function Templates() {
-    return (
-        <div>
-            Templates
-        </div>
-    );
-  }
-  
-  export default Templates;
+  return <div>Templates</div>;
+}
+
+export default Templates;
