@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 
-let getNavStyles = function getNavStyles(indx, length) {
+const getNavStyles = (indx, length) => {
   let styles = [];
 
   for (let i = 0; i < length; i++) {
-    if (i < indx) {
-      styles.push("done");
-    } else if (i === indx) {
-      styles.push("doing");
-    } else {
-      styles.push("todo");
-    }
+    styles.push(i < indx ? "done" : i === indx ? "doing" : "todo");
   }
 
   return styles;
 };
 
-let getButtonsState = function getButtonsState(indx, length) {
+const getButtonsState = (indx, length) => {
   if (indx > 0 && indx < length - 1) {
     return {
       showPreviousBtn: true,
@@ -50,30 +44,23 @@ function MultiStep(props) {
     setButtons(getButtonsState(indx, props.steps.length));
   }
 
-  let next = function next() {
-    return setStepState(compState + 1);
-  };
+  const next = () => setStepState(compState + 1);
 
-  let previous = function previous() {
-    return setStepState(compState > 0 ? compState - 1 : compState);
-  };
+  const previous = () =>
+    setStepState(compState > 0 ? compState - 1 : compState);
 
-  let handleKeyDown = function handleKeyDown(evt) {
-    return evt.which === 13 ? next(props.steps.length) : {};
-  };
+  const handleKeyDown = evt =>
+    evt.which === 13 ? next(props.steps.length) : {};
 
-  let handleOnClick = function handleOnClick(evt) {
-    if (
+  const handleOnClick = evt =>
+    setStepState(
       evt.currentTarget.value === props.steps.length - 1 &&
-      compState === props.steps.length - 1
-    ) {
-      setStepState(props.steps.length);
-    } else {
-      setStepState(evt.currentTarget.value);
-    }
-  };
+        compState === props.steps.length - 1
+        ? props.steps.length
+        : evt.currentTarget.value
+    );
 
-  let renderSteps = function renderSteps() {
+  const renderSteps = () => {
     return props.steps.map(function(s, i) {
       return (
         <li
