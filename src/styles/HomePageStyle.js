@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bgBanner from "../assets/images/cv-banner.jpg";
+import bgBanner from "../assets/images/cv-banner.jpeg";
 
 export const AppContainer = styled.div`
   text-align: left;
