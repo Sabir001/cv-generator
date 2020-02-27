@@ -26,6 +26,7 @@ const PrimaryForm = () => {
 
   const handleLinks = (event, index, type) => {
     let newLink = [...links];
+    // eslint-disable-next-line
     newLink.map((item, i) => {
       if (i === index) {
         if (type === "name") {
