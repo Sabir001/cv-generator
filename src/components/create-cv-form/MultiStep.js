@@ -11,22 +11,10 @@ const getNavStyles = (indx, length) => {
 };
 
 const getButtonsState = (indx, length) => {
-  if (indx > 0 && indx < length - 1) {
-    return {
-      showPreviousBtn: true,
-      showNextBtn: true
-    };
-  } else if (indx === 0) {
-    return {
-      showPreviousBtn: false,
-      showNextBtn: true
-    };
-  } else {
-    return {
-      showPreviousBtn: true,
-      showNextBtn: false
-    };
-  }
+  return {
+    showPreviousBtn: indx > 0 && indx < length - 1 ? true : indx !== 0,
+    showNextBtn: indx > 0 && indx < length - 1 ? true : indx === 0
+  };
 };
 
 function MultiStep(props) {
@@ -82,36 +70,18 @@ function MultiStep(props) {
       {props.steps[compState].component}
       <div
         className="step-buttons"
-        style={
-          props.showNavigation
-            ? {}
-            : {
-                display: "none"
-              }
-        }
+        style={{ display: !props.showNavigation && "none" }}
       >
         <button
           className="previous"
-          style={
-            buttonsState.showPreviousBtn
-              ? {}
-              : {
-                  display: "none"
-                }
-          }
+          style={{ display: !buttonsState.showPreviousBtn && "none" }}
           onClick={previous}
         >
           Previous
         </button>
         <button
           className="next"
-          style={
-            buttonsState.showNextBtn
-              ? {}
-              : {
-                  display: "none"
-                }
-          }
+          style={{ display: !buttonsState.showNextBtn && "none" }}
           onClick={next}
         >
           Next
