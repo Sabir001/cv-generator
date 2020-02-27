@@ -1,58 +1,5 @@
 import React, { useState } from "react";
 
-function _slicedToArray(arr, i) {
-  return (
-    _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest()
-  );
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  if (
-    !(
-      Symbol.iterator in Object(arr) ||
-      Object.prototype.toString.call(arr) === "[object Arguments]"
-    )
-  ) {
-    return;
-  }
-
-  let _arr = [];
-  let _n = true;
-  let _d = false;
-  let _e = undefined;
-
-  try {
-    for (
-      var _i = arr[Symbol.iterator](), _s;
-      !(_n = (_s = _i.next()).done);
-      _n = true
-    ) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
-
 let getNavStyles = function getNavStyles(indx, length) {
   let styles = [];
 
@@ -89,20 +36,13 @@ let getButtonsState = function getButtonsState(indx, length) {
 };
 
 function MultiStep(props) {
-  let _useState = useState(getNavStyles(0, props.steps.length)),
-    _useState2 = _slicedToArray(_useState, 2),
-    stylesState = _useState2[0],
-    setStyles = _useState2[1];
+  let [stylesState, setStyles] = useState(getNavStyles(0, props.steps.length));
 
-  let _useState3 = useState(0),
-    _useState4 = _slicedToArray(_useState3, 2),
-    compState = _useState4[0],
-    setComp = _useState4[1];
+  let [compState, setComp] = useState(0);
 
-  let _useState5 = useState(getButtonsState(0, props.steps.length)),
-    _useState6 = _slicedToArray(_useState5, 2),
-    buttonsState = _useState6[0],
-    setButtons = _useState6[1];
+  let [buttonsState, setButtons] = useState(
+    getButtonsState(0, props.steps.length)
+  );
 
   function setStepState(indx) {
     setStyles(getNavStyles(indx, props.steps.length));
