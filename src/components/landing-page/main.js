@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   LandingWrapper,
   LandingContent,
@@ -6,27 +7,19 @@ import {
   LandingButton
 } from "../../styles/HomePageStyle";
 
-function LandingMain({ handleCreateCV, handleTemplate }) {
+function LandingMain() {
   return (
     <LandingWrapper>
       <LandingContent>
         <LandingHeader>CV Generator</LandingHeader>
 
         <LandingButton>
-          <button
-            onClick={() => handleCreateCV()}
-            className="button-line"
-            href="#"
-          >
-            Create Now
-          </button>
-          <button
-            onClick={() => handleTemplate()}
-            className="button-line"
-            href="#"
-          >
-            Templates
-          </button>
+          <Link to="/create">
+            <button>Create Now</button>
+          </Link>
+          <Link to="/templates">
+            <button>Templates</button>
+          </Link>
         </LandingButton>
       </LandingContent>
     </LandingWrapper>
