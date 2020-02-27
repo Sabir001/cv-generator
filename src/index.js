@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -35,15 +36,20 @@ ReactDOM.render(
   <React.Fragment>
     <GlobalStyle />
     <AppContainer>
-      <AppHeader>
-        <AppHeaderCenter>
-          <AppLogo src={logo} alt="logo" />
-          <AppTitle>CV Generator</AppTitle>
-        </AppHeaderCenter>
-      </AppHeader>
-      <BodyContainer>
-        <App />
-      </BodyContainer>
+      <Router>
+        <AppHeader>
+          <AppHeaderCenter>
+            <Link to="/">
+              <AppLogo src={logo} alt="logo" />
+            </Link>
+
+            <AppTitle>CV Generator</AppTitle>
+          </AppHeaderCenter>
+        </AppHeader>
+        <BodyContainer>
+          <App />
+        </BodyContainer>
+      </Router>
     </AppContainer>
   </React.Fragment>,
   document.getElementById("root")
