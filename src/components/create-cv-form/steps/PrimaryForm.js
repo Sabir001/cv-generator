@@ -1,16 +1,12 @@
 import React, { useState } from "react";
+import {emptyCheck, lengthCheck, nameCheck, emailCheck} from '../../../assets/js/validation';
 
-const PrimaryForm = () => {
+const PrimaryForm = ({errors, setErrors}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [links, setLinks] = useState([{ name: "", url: "" }]);
   const [submit, setSubmit] = useState(false);
-  const [errors, setErrors] = useState({
-    nameError: [],
-    emailError: [],
-    phoneError: []
-  });
 
   const handleName = event => {
     setName(event.target.value);
@@ -26,7 +22,6 @@ const PrimaryForm = () => {
 
   const handleLinks = (event, index, type) => {
     let newLink = [...links];
-    // eslint-disable-next-line
     newLink.map((item, i) => {
       if (i === index) {
         if (type === "name") {
@@ -40,38 +35,6 @@ const PrimaryForm = () => {
     setLinks(newLink);
   };
 
-  //Empty Validation Function
-  const emptyCheck = value => {
-    if (value.length < 1) {
-      return false;
-    }
-    return true;
-  };
-
-  //Length Validation Check
-  const lengthCheck = (value, minlength, maxLength) => {
-    if (value.length <= minlength && value.length <= maxLength) {
-      return false;
-    }
-    return true;
-  };
-
-  //Name Validation Check
-  const nameCheck = name => {
-    if (/[!@#$%^&*(),.?":{}|<>]/g.test(name) || /\d+/g.test(name)) {
-      return false;
-    }
-    return true;
-  };
-
-  //Email Validation Check
-  const emailCheck = email => {
-    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-      return false;
-    }
-    return true;
-  };
-
   const addLink = e => {
     e.preventDefault();
     setLinks([...links, { name: "", url: "" }]);
@@ -82,60 +45,59 @@ const PrimaryForm = () => {
     setLinks(newLinks);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    let submit = true;
-
-    //Name Validation
+  
+  //Name Validation
+  let validateName = (value) => {
     let nameError = [];
-    if (!emptyCheck(name)) {
-      submit = false;
+    if (!emptyCheck(value)) {
       nameError = [...nameError, "Name shouldn't be empty."];
     }
-    if (!lengthCheck(name, 4, 30)) {
-      submit = false;
+    if (!lengthCheck(value, 4, 30)) {
       nameError = [
         ...nameError,
         "Name should be minimum 4 and maximum 30 words."
       ];
     }
-    if (!nameCheck(name)) {
-      submit = false;
+    if (!nameCheck(value)) {
       nameError = [...nameError, "The name you provided is not valid."];
     }
+    return nameError;
+  };
 
-    //Email Validation
+  //Email Validation
+  let validateEmail = (value) => {
     let emailError = [];
-    if (!emptyCheck(email)) {
-      submit = false;
+    if (!emptyCheck(value)) {
       emailError = [...emailError, "Email shouldn't be empty."];
     }
-    if (!emailCheck(email)) {
-      submit = false;
+    if (!emailCheck(value)) {
       emailError = [...emailError, "The Email you provided is not valid."];
     }
+    return emailError;
+  };
 
-    //Phone Validation
+  //Phone Validation
+  let validatePhone = (value) => {
     let phoneError = [];
-    if (!emptyCheck(phone)) {
-      submit = false;
+    if (!emptyCheck(value)) {
       phoneError = [...phoneError, "Phone Number shouldn't be empty."];
     }
+    return phoneError;
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
 
     //Set Errors
     setErrors({
-      nameError: nameError,
-      emailError: emailError,
-      phoneError: phoneError
+      nameError: validateName(name),
+      emailError: validateEmail(email),
+      phoneError: validatePhone(phone)
     });
 
-    if (submit) {
-      setSubmit(true);
-    }
+    setSubmit(true);
   };
 
-  // console.log("Name ", name);
-  // console.log("Email ", email);
   return (
     <div className="personal-info">
       <div className="form-item">

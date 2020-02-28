@@ -32,7 +32,9 @@ function MultiStep(props) {
     setButtons(getButtonsState(indx, props.steps.length));
   }
 
-  const next = () => setStepState(compState + 1);
+  const next = () => {
+    setStepState(compState + 1)
+  };
 
   const previous = () =>
     setStepState(compState > 0 ? compState - 1 : compState);

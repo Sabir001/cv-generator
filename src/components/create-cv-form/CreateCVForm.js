@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MultiStep from "./MultiStep";
 import PrimaryForm from "./steps/PrimaryForm";
 import Objectives from "./steps/Objectives";
@@ -12,8 +12,14 @@ import "../../assets/css/multistep.css";
 import "../../assets/css/validation.css";
 
 const CreateCVForm = () => {
+  const [errors, setErrors] = useState({
+    nameError: [],
+    emailError: [],
+    phoneError: []
+  });
+
   const steps = [
-    { name: "Personal", component: <PrimaryForm /> },
+    { name: "Personal", component: <PrimaryForm errors={errors} setErrors={setErrors} /> },
     { name: "Objectives", component: <Objectives /> },
     { name: "Education", component: <Education /> },
     { name: "Experience", component: <Experience /> },
@@ -25,7 +31,7 @@ const CreateCVForm = () => {
 
   return (
     <div className="cf-steps">
-      <MultiStep steps={steps} />
+      <MultiStep steps={steps} errors={errors} />
     </div>
   );
 };
