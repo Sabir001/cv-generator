@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {emptyCheck, lengthCheck, nameCheck, emailCheck} from '../../assets/js/validation';
 
 const getNavStyles = (indx, length) => {
   let styles = [];
@@ -33,6 +34,27 @@ function MultiStep(props) {
   }
 
   const next = () => {
+    if ( props.steps[compState].name == 'Objectives' ) { //Validation check for Objectives Step
+      const objectiveValue = props.formValues.objectives.objective;
+      const validateObjective = (value) => {
+        let objectiveError = [];
+        if (!emptyCheck(value)) {
+          objectiveError = [...objectiveError, "Please write your career objective"];
+        }
+
+        if (!lengthCheck(value, 30, 150)) {
+          objectiveError = [
+            ...objectiveError,
+            "Name should be minimum 30 and maximum 150 words."
+          ];
+        }
+        return objectiveError;
+      };
+      props.error.setErrors({'Objectives': validateObjective(objectiveValue)}); //Object errors set to state
+      if (validateObjective(objectiveValue).length > 0) { //if has error, next step won't show
+        return false;
+      }
+    }
     setStepState(compState + 1)
   };
 

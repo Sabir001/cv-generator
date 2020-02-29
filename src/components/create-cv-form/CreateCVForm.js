@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MultiStep from "./MultiStep";
 import PrimaryForm from "./steps/PrimaryForm";
 import Objectives from "./steps/Objectives";
@@ -12,15 +12,43 @@ import "../../assets/css/multistep.css";
 import "../../assets/css/validation.css";
 
 const CreateCVForm = () => {
-  const [errors, setErrors] = useState({
-    nameError: [],
-    emailError: [],
-    phoneError: []
-  });
+  const [primaryInfo, setPrimaryInfo] = useState(
+    {
+      name: "",
+      email: "",
+      phone: "",
+      links: [{ name: "", url: "" }]
+    }
+  );
+
+  const [objectives, setObjectives] = useState(
+    {
+      objective: ""
+    }
+  );
+
+  // useEffect( () => {
+  //   console.log("---", objectives);
+  // }, [objectives]);
+  const [submit, setSubmit] = useState(false);
+
+  const [errors, setErrors] = useState(    
+    {
+      'Personal' : {
+        nameError: [],
+        emailError: [],
+        phoneError: []
+      },
+      'Objectives' : 
+      {
+        objective: []
+      }      
+    }
+  );
 
   const steps = [
-    { name: "Personal", component: <PrimaryForm errors={errors} setErrors={setErrors} /> },
-    { name: "Objectives", component: <Objectives /> },
+    { name: "Personal", component: <PrimaryForm states={{primaryInfo, setPrimaryInfo, errors, setErrors}} /> },
+    { name: "Objectives", component: <Objectives states={{objectives, setObjectives, errors, setErrors}} /> },
     { name: "Education", component: <Education /> },
     { name: "Experience", component: <Experience /> },
     { name: "Skills", component: <Skills /> },
@@ -31,7 +59,29 @@ const CreateCVForm = () => {
 
   return (
     <div className="cf-steps">
-      <MultiStep steps={steps} errors={errors} />
+      <MultiStep steps={steps} error={{errors, setErrors}} formValues={ { objectives } } />
+
+      {/* {submit && (
+      <div>
+        {name && <p>Name: {name}</p>}
+
+        {email && <p>Email: {email}</p>}
+
+        {phone && <p>Phone: {phone}</p>}
+
+        {links.length > 0 && (
+          <p>
+            Important Links:
+            <br />
+            {links.map(link => (
+              <span>
+                <strong> {link.name} </strong>: {link.url}
+              </span>
+            ))}
+          </p>
+        )}
+      </div>
+    )} */}
     </div>
   );
 };
