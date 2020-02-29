@@ -34,6 +34,81 @@ function MultiStep(props) {
   }
 
   const next = () => {
+    //Validation check for Personal Step
+    if ( props.steps[compState].name == 'Personal' ) {
+      const name = props.formValues.primaryInfo.name;
+      const email = props.formValues.primaryInfo.email;
+      const phone = props.formValues.primaryInfo.phone;
+      let primaryError = false;
+
+      // //Name Validation
+      const validateName = (value) => {
+        let nameError = [];
+        if (!emptyCheck(value)) {
+          nameError = [...nameError, "Name shouldn't be empty."];
+        }
+        if (!lengthCheck(value, 4, 30)) {
+          nameError = [
+            ...nameError,
+            "Name should be minimum 4 and maximum 30 words."
+          ];
+        }
+        if (!nameCheck(value)) {
+          nameError = [...nameError, "The name you provided is not valid."];
+        }
+        if ( nameError.length > 0 ) {
+          primaryError = true;
+        }
+        return nameError;
+      };
+
+      //Email Validation
+      const validateEmail = (value) => {
+        let emailError = [];
+        if (!emptyCheck(value)) {
+          emailError = [...emailError, "Email shouldn't be empty."];
+        }
+        if (!emailCheck(value)) {
+          emailError = [...emailError, "The Email you provided is not valid."];
+        }
+        if ( emailError.length > 0 ) {
+          primaryError = true;
+        }
+        return emailError;
+      };
+
+      //Phone Validation
+      const validatePhone = (value) => {
+        let phoneError = [];
+        if (!emptyCheck(value)) {
+          phoneError = [...phoneError, "Phone Number shouldn't be empty."];
+        }
+        if ( phoneError.length > 0 ) {
+          primaryError = true;
+        }
+        return phoneError;
+      };
+
+      props.error.setErrors( //Personal info errors set to state
+        {
+          'Personal': {
+            nameError: validateName(name),
+            emailError: validateEmail(email),
+            phoneError: validatePhone(phone),
+          },
+          'Objectives' : 
+          {
+            objective: [...props.error.errors.Objectives.objective]
+          }
+        }
+      );
+
+      if (primaryError) {
+        return false;
+      }
+    }
+
+    //Validation check for Objectives Step
     if ( props.steps[compState].name == 'Objectives' ) { //Validation check for Objectives Step
       const objectiveValue = props.formValues.objectives.objective;
       const validateObjective = (value) => {
@@ -50,7 +125,16 @@ function MultiStep(props) {
         }
         return objectiveError;
       };
-      props.error.setErrors({'Objectives': validateObjective(objectiveValue)}); //Object errors set to state
+      props.error.setErrors({
+        'Personal': {
+          nameError: [...props.error.errors.Personal.nameError],
+          emailError: [...props.error.errors.Personal.emailError],
+          phoneError: [...props.error.errors.Personal.phoneError],
+        },
+        'Objectives': {
+          objective: validateObjective(objectiveValue)
+        }
+      }); //Object errors set to state
       if (validateObjective(objectiveValue).length > 0) { //if has error, next step won't show
         return false;
       }

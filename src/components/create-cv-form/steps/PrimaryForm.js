@@ -83,46 +83,6 @@ const PrimaryForm = (props) => {
     );
   };
 
-  
-  // //Name Validation
-  // const validateName = (value) => {
-  //   let nameError = [];
-  //   if (!emptyCheck(value)) {
-  //     nameError = [...nameError, "Name shouldn't be empty."];
-  //   }
-  //   if (!lengthCheck(value, 4, 30)) {
-  //     nameError = [
-  //       ...nameError,
-  //       "Name should be minimum 4 and maximum 30 words."
-  //     ];
-  //   }
-  //   if (!nameCheck(value)) {
-  //     nameError = [...nameError, "The name you provided is not valid."];
-  //   }
-  //   return nameError;
-  // };
-
-  // //Email Validation
-  // const validateEmail = (value) => {
-  //   let emailError = [];
-  //   if (!emptyCheck(value)) {
-  //     emailError = [...emailError, "Email shouldn't be empty."];
-  //   }
-  //   if (!emailCheck(value)) {
-  //     emailError = [...emailError, "The Email you provided is not valid."];
-  //   }
-  //   return emailError;
-  // };
-
-  // //Phone Validation
-  // const validatePhone = (value) => {
-  //   let phoneError = [];
-  //   if (!emptyCheck(value)) {
-  //     phoneError = [...phoneError, "Phone Number shouldn't be empty."];
-  //   }
-  //   return phoneError;
-  // };
-
   return (
     <div className="personal-info">
       <div className="form-item">
@@ -135,15 +95,15 @@ const PrimaryForm = (props) => {
           placeholder="Your Name"
         />
         <br />
-        {/* {errors.nameError.length > 0 && (
+        {props.states.errors.Personal.nameError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.nameError.map(error => (
+              {props.states.errors.Personal.nameError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
           </div>
-        )} */}
+        )}
       </div>
 
       <div className="form-item">
@@ -156,15 +116,15 @@ const PrimaryForm = (props) => {
           placeholder="Your Email"
         />
         <br />
-        {/* {errors.emailError.length > 0 && (
+        {props.states.errors.Personal.emailError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.emailError.map(error => (
+              {props.states.errors.Personal.emailError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
           </div>
-        )} */}
+        )}
       </div>
 
       <div className="form-item">
@@ -177,15 +137,15 @@ const PrimaryForm = (props) => {
           placeholder="Your Phone Number"
         />
         <br />
-        {/* {errors.phoneError.length > 0 && (
+        {props.states.errors.Personal.phoneError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.phoneError.map(error => (
+              {props.states.errors.Personal.phoneError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
           </div>
-        )} */}
+        )}
       </div>
 
       <div className="form-item">

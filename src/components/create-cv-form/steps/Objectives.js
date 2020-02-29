@@ -22,10 +22,10 @@ const Objectives = (props) => {
           placeholder="Write Career Objectives"
         />
         <br />
-        {props.states.errors.Objectives.length > 0 && (
+        {props.states.errors.Objectives.objective.length > 0 && (
           <div className="errors">
             <ul>
-              {props.states.errors.Objectives.map(error => (
+              {props.states.errors.Objectives.objective.map(error => (
                 <li> {error} </li>
               ))}
             </ul>

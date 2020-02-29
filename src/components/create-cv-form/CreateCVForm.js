@@ -39,7 +39,7 @@ const CreateCVForm = () => {
         emailError: [],
         phoneError: []
       },
-      'Objectives' : 
+      'Objectives' :
       {
         objective: []
       }      
@@ -59,7 +59,7 @@ const CreateCVForm = () => {
 
   return (
     <div className="cf-steps">
-      <MultiStep steps={steps} error={{errors, setErrors}} formValues={ { objectives } } />
+      <MultiStep steps={steps} error={{errors, setErrors}} formValues={ { primaryInfo, objectives } } />
 
       {/* {submit && (
       <div>
