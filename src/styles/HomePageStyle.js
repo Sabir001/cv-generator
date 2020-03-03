@@ -46,37 +46,37 @@ export const AppLogo = styled.img`
 `;
 
 export const LandingWrapper = styled.div`
-background: rgb(16,97,131);
-background-image: url("${bgBanner}");
-position: fixed;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
-display: -webkit-flex;
-display: flex;
-flex-direction: column;
-flex-direction: column;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: center;
-justify-content: center;
-text-align: center;
-
-&:after {
-  content: "";
-  position: absolute;
-  left: 0;
+  background: rgb(16,97,131);
+  background-image: url("${bgBanner}");
+  position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgb(16,97,131);
-  background: linear-gradient(90deg, rgba(16,97,131,.85) 0%, rgba(13,190,158,.85) 35%, rgba(3,159,196,.85) 100%);
-  z-index: 1;
-}
+  background-size: cover;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  text-align: center;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(16,97,131);
+    background: linear-gradient(90deg, rgba(16,97,131,.85) 0%, rgba(13,190,158,.85) 35%, rgba(3,159,196,.85) 100%);
+    z-index: 1;
+  }
 `;
 
 export const LandingContent = styled.div`
