@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import {emptyCheck, lengthCheck, nameCheck, emailCheck} from '../../../assets/js/validation';
+import React from "react";
 
 const PrimaryForm = (props) => {
 
