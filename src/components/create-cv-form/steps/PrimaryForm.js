@@ -1,4 +1,5 @@
 import React from "react";
+import {repeatFormValidation} from '../../../assets/js/validation';
 
 const PrimaryForm = (props) => {
 
@@ -60,6 +61,10 @@ const PrimaryForm = (props) => {
 
   const addLink = e => {
     e.preventDefault();
+    // if (props.states.primaryInfo.links.length == 1) {
+    //   console.log("Primary", repeatFormValidation(props.states.primaryInfo.links[0]) );
+    // }
+    
     props.states.setPrimaryInfo(
       {
         name: props.states.primaryInfo.name,
@@ -94,10 +99,10 @@ const PrimaryForm = (props) => {
           placeholder="Your Name"
         />
         <br />
-        {props.states.errors.Personal.nameError.length > 0 && (
+        {props.states.primaryError.nameError.length > 0 && (
           <div className="errors">
             <ul>
-              {props.states.errors.Personal.nameError.map(error => (
+              {props.states.primaryError.nameError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -115,10 +120,10 @@ const PrimaryForm = (props) => {
           placeholder="Your Email"
         />
         <br />
-        {props.states.errors.Personal.emailError.length > 0 && (
+        {props.states.primaryError.emailError.length > 0 && (
           <div className="errors">
             <ul>
-              {props.states.errors.Personal.emailError.map(error => (
+              {props.states.primaryError.emailError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -136,10 +141,10 @@ const PrimaryForm = (props) => {
           placeholder="Your Phone Number"
         />
         <br />
-        {props.states.errors.Personal.phoneError.length > 0 && (
+        {props.states.primaryError.phoneError.length > 0 && (
           <div className="errors">
             <ul>
-              {props.states.errors.Personal.phoneError.map(error => (
+              {props.states.primaryError.phoneError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -179,12 +184,6 @@ const PrimaryForm = (props) => {
           <button onClick={addLink}>+</button>
         </div>
       </div>
-
-      {/* <div className="submit_button">
-        <button className="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>       */}
 
     </div>
   );

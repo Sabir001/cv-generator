@@ -33,6 +33,7 @@ function MultiStep(props) {
     setButtons(getButtonsState(indx, props.steps.length));
   }
 
+  //Next Step Button Click Function
   const next = () => {
     //Validation check for Personal Step
     if ( props.steps[compState].name == 'Personal' ) {
@@ -89,17 +90,11 @@ function MultiStep(props) {
         return phoneError;
       };
 
-      props.error.setErrors( //Personal info errors set to state
+      props.error.setPrimaryError( //Personal info errors set to state
         {
-          'Personal': {
-            nameError: validateName(name),
-            emailError: validateEmail(email),
-            phoneError: validatePhone(phone),
-          },
-          'Objectives' : 
-          {
-            objective: [...props.error.errors.Objectives.objective]
-          }
+          nameError: validateName(name),
+          emailError: validateEmail(email),
+          phoneError: validatePhone(phone),
         }
       );
 
@@ -125,16 +120,11 @@ function MultiStep(props) {
         }
         return objectiveError;
       };
-      props.error.setErrors({
-        'Personal': {
-          nameError: [...props.error.errors.Personal.nameError],
-          emailError: [...props.error.errors.Personal.emailError],
-          phoneError: [...props.error.errors.Personal.phoneError],
-        },
-        'Objectives': {
+      props.error.setObjectiveError(
+        {
           objective: validateObjective(objectiveValue)
         }
-      }); //Object errors set to state
+      ); //Object errors set to state
       if (validateObjective(objectiveValue).length > 0) { //if has error, next step won't show
         return false;
       }

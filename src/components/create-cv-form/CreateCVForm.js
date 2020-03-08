@@ -32,23 +32,19 @@ const CreateCVForm = () => {
   // }, [objectives]);
   const [submit, setSubmit] = useState(false);
 
-  const [errors, setErrors] = useState(    
-    {
-      'Personal' : {
-        nameError: [],
-        emailError: [],
-        phoneError: []
-      },
-      'Objectives' :
-      {
-        objective: []
-      }      
-    }
-  );
+  const [primaryError, setPrimaryError] = useState({
+    nameError: [],
+    emailError: [],
+    phoneError: []
+  });
+
+  const [objectiveError, setObjectiveError] = useState({
+    objective: []
+  });
 
   const steps = [
-    { name: "Personal", component: <PrimaryForm states={{primaryInfo, setPrimaryInfo, errors, setErrors}} /> },
-    { name: "Objectives", component: <Objectives states={{objectives, setObjectives, errors, setErrors}} /> },
+    { name: "Personal", component: <PrimaryForm states={{primaryInfo, setPrimaryInfo, primaryError}} /> },
+    { name: "Objectives", component: <Objectives states={{objectives, setObjectives, objectiveError}} /> },
     { name: "Education", component: <Education /> },
     { name: "Experience", component: <Experience /> },
     { name: "Skills", component: <Skills /> },
@@ -59,7 +55,16 @@ const CreateCVForm = () => {
 
   return (
     <div className="cf-steps">
-      <MultiStep steps={steps} error={{errors, setErrors}} formValues={ { primaryInfo, objectives } } />
+      <MultiStep 
+        steps={steps} 
+        formValues={ { primaryInfo, objectives } } 
+        error={{
+          primaryError, 
+          setPrimaryError,
+          objectiveError,
+          setObjectiveError
+        }} 
+      />
 
       {/* {submit && (
       <div>
