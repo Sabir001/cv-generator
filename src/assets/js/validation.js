@@ -32,5 +32,7 @@ export const emailCheck = email => {
 
 export const repeatFormValidation = (values) => {
     console.log("Validation", values);
-    values.map( value => {})
+    values.map( value => {
+        return "";
+    })
 }
