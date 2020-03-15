@@ -1,39 +1,32 @@
 import React from "react";
-import {repeatFormValidation} from '../../../assets/js/validation';
+import { repeatFormValidation } from "../../../assets/js/validation";
 
-const PrimaryForm = (props) => {
-
+const PrimaryForm = props => {
   const handleName = event => {
-    props.states.setPrimaryInfo(
-      {
-        name: event.target.value,
-        email: props.states.primaryInfo.email,
-        phone: props.states.primaryInfo.phone,
-        links: [...props.states.primaryInfo.links]
-      }
-    );
+    props.states.setPrimaryInfo({
+      name: event.target.value,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
-  const handleEmail = event => {    
-    props.states.setPrimaryInfo(
-      {
-        name: props.states.primaryInfo.name,
-        email: event.target.value,
-        phone: props.states.primaryInfo.phone,
-        links: [...props.states.primaryInfo.links]
-      }
-    );
+  const handleEmail = event => {
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: event.target.value,
+      phone: props.states.primaryInfo.phone,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
   const handlePhone = event => {
-    props.states.setPrimaryInfo(
-      {
-        name: props.states.primaryInfo.name,
-        email: props.states.primaryInfo.email,
-        phone: event.target.value,
-        links: [...props.states.primaryInfo.links]
-      }
-    );
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: event.target.value,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
   const handleLinks = (event, index, type) => {
@@ -49,42 +42,43 @@ const PrimaryForm = (props) => {
       }
     });
 
-    props.states.setPrimaryInfo(
-      {
-        name: props.states.primaryInfo.name,
-        email: props.states.primaryInfo.email,
-        phone: props.states.primaryInfo.phone,
-        links: newLink
-      }
-    );
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: newLink
+    });
   };
 
   const addLink = e => {
     e.preventDefault();
-    // if (props.states.primaryInfo.links.length == 1) {
-    //   console.log("Primary", repeatFormValidation(props.states.primaryInfo.links[0]) );
-    // }
+    let index = props.states.primaryInfo.links.length;
+    let lastValues = props.states.primaryInfo.links[index - 1];
+    var arrayValue = Object.keys(lastValues);
+    let error = repeatFormValidation(arrayValue);
+    console.log("Error", error);
     
+
     props.states.setPrimaryInfo(
-      {
-        name: props.states.primaryInfo.name,
-        email: props.states.primaryInfo.email,
-        phone: props.states.primaryInfo.phone,
-        links: [...props.states.primaryInfo.links, { name: "", url: "" }]
-      }
+      error
+        ? null
+        : {
+            name: props.states.primaryInfo.name,
+            email: props.states.primaryInfo.email,
+            phone: props.states.primaryInfo.phone,
+            links: [...props.states.primaryInfo.links, { name: "", url: "" }]
+          }
     );
   };
 
   const deleteLink = index => {
     let newLinks = props.states.primaryInfo.links.filter((_, i) => i !== index);
-    props.states.setPrimaryInfo(
-      {
-        name: props.states.primaryInfo.name,
-        email: props.states.primaryInfo.email,
-        phone: props.states.primaryInfo.phone,
-        links: newLinks
-      }
-    );
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: newLinks
+    });
   };
 
   return (
@@ -184,7 +178,6 @@ const PrimaryForm = (props) => {
           <button onClick={addLink}>+</button>
         </div>
       </div>
-
     </div>
   );
 };
