@@ -1,32 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
+import { repeatFormValidation } from "../../../assets/js/validation";
 
-const PrimaryForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [links, setLinks] = useState([{ name: "", url: "" }]);
-  const [submit, setSubmit] = useState(false);
-  const [errors, setErrors] = useState({
-    nameError: [],
-    emailError: [],
-    phoneError: []
-  });
-
+const PrimaryForm = props => {
   const handleName = event => {
-    setName(event.target.value);
+    props.states.setPrimaryInfo({
+      name: event.target.value,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
   const handleEmail = event => {
-    setEmail(event.target.value);
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: event.target.value,
+      phone: props.states.primaryInfo.phone,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
   const handlePhone = event => {
-    setPhone(event.target.value);
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: event.target.value,
+      links: [...props.states.primaryInfo.links]
+    });
   };
 
   const handleLinks = (event, index, type) => {
-    let newLink = [...links];
-    // eslint-disable-next-line
+    let newLink = [...props.states.primaryInfo.links];
     newLink.map((item, i) => {
       if (i === index) {
         if (type === "name") {
@@ -37,105 +41,46 @@ const PrimaryForm = () => {
         }
       }
     });
-    setLinks(newLink);
-  };
 
-  //Empty Validation Function
-  const emptyCheck = value => {
-    if (value.length < 1) {
-      return false;
-    }
-    return true;
-  };
-
-  //Length Validation Check
-  const lengthCheck = (value, minlength, maxLength) => {
-    if (value.length <= minlength && value.length <= maxLength) {
-      return false;
-    }
-    return true;
-  };
-
-  //Name Validation Check
-  const nameCheck = name => {
-    if (/[!@#$%^&*(),.?":{}|<>]/g.test(name) || /\d+/g.test(name)) {
-      return false;
-    }
-    return true;
-  };
-
-  //Email Validation Check
-  const emailCheck = email => {
-    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-      return false;
-    }
-    return true;
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: newLink
+    });
   };
 
   const addLink = e => {
     e.preventDefault();
-    setLinks([...links, { name: "", url: "" }]);
+    let index = props.states.primaryInfo.links.length;
+    let lastValues = props.states.primaryInfo.links[index - 1];
+    var arrayValue = Object.keys(lastValues);
+    let error = repeatFormValidation(arrayValue);
+    console.log("Error", error);
+    
+
+    props.states.setPrimaryInfo(
+      error
+        ? null
+        : {
+            name: props.states.primaryInfo.name,
+            email: props.states.primaryInfo.email,
+            phone: props.states.primaryInfo.phone,
+            links: [...props.states.primaryInfo.links, { name: "", url: "" }]
+          }
+    );
   };
 
   const deleteLink = index => {
-    let newLinks = links.filter((_, i) => i !== index);
-    setLinks(newLinks);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    let submit = true;
-
-    //Name Validation
-    let nameError = [];
-    if (!emptyCheck(name)) {
-      submit = false;
-      nameError = [...nameError, "Name shouldn't be empty."];
-    }
-    if (!lengthCheck(name, 4, 30)) {
-      submit = false;
-      nameError = [
-        ...nameError,
-        "Name should be minimum 4 and maximum 30 words."
-      ];
-    }
-    if (!nameCheck(name)) {
-      submit = false;
-      nameError = [...nameError, "The name you provided is not valid."];
-    }
-
-    //Email Validation
-    let emailError = [];
-    if (!emptyCheck(email)) {
-      submit = false;
-      emailError = [...emailError, "Email shouldn't be empty."];
-    }
-    if (!emailCheck(email)) {
-      submit = false;
-      emailError = [...emailError, "The Email you provided is not valid."];
-    }
-
-    //Phone Validation
-    let phoneError = [];
-    if (!emptyCheck(phone)) {
-      submit = false;
-      phoneError = [...phoneError, "Phone Number shouldn't be empty."];
-    }
-
-    //Set Errors
-    setErrors({
-      nameError: nameError,
-      emailError: emailError,
-      phoneError: phoneError
+    let newLinks = props.states.primaryInfo.links.filter((_, i) => i !== index);
+    props.states.setPrimaryInfo({
+      name: props.states.primaryInfo.name,
+      email: props.states.primaryInfo.email,
+      phone: props.states.primaryInfo.phone,
+      links: newLinks
     });
-
-    if (submit) {
-      setSubmit(true);
-    }
   };
 
-  // console.log("Name ", name);
-  // console.log("Email ", email);
   return (
     <div className="personal-info">
       <div className="form-item">
@@ -143,15 +88,15 @@ const PrimaryForm = () => {
         <input
           type="text"
           name="name"
-          value={name}
+          value={props.states.primaryInfo.name}
           onChange={event => handleName(event)}
           placeholder="Your Name"
         />
         <br />
-        {errors.nameError.length > 0 && (
+        {props.states.primaryError.nameError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.nameError.map(error => (
+              {props.states.primaryError.nameError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -164,15 +109,15 @@ const PrimaryForm = () => {
         <input
           type="email"
           name="email"
-          value={email}
+          value={props.states.primaryInfo.email}
           onChange={event => handleEmail(event)}
           placeholder="Your Email"
         />
         <br />
-        {errors.emailError.length > 0 && (
+        {props.states.primaryError.emailError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.emailError.map(error => (
+              {props.states.primaryError.emailError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -185,15 +130,15 @@ const PrimaryForm = () => {
         <input
           type="text"
           name="phone"
-          value={phone}
+          value={props.states.primaryInfo.phone}
           onChange={event => handlePhone(event)}
           placeholder="Your Phone Number"
         />
         <br />
-        {errors.phoneError.length > 0 && (
+        {props.states.primaryError.phoneError.length > 0 && (
           <div className="errors">
             <ul>
-              {errors.phoneError.map(error => (
+              {props.states.primaryError.phoneError.map(error => (
                 <li> {error} </li>
               ))}
             </ul>
@@ -204,7 +149,7 @@ const PrimaryForm = () => {
       <div className="form-item">
         <label name="link">Important Links</label>
 
-        {links.map((link, index) => (
+        {props.states.primaryInfo.links.map((link, index) => (
           <React.Fragment key={index}>
             <div className="important_links">
               <div className="name">
@@ -233,34 +178,6 @@ const PrimaryForm = () => {
           <button onClick={addLink}>+</button>
         </div>
       </div>
-
-      <div className="submit_button">
-        <button className="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>
-
-      {submit && (
-        <div>
-          {name && <p>Name: {name}</p>}
-
-          {email && <p>Email: {email}</p>}
-
-          {phone && <p>Phone: {phone}</p>}
-
-          {links.length > 0 && (
-            <p>
-              Important Links:
-              <br />
-              {links.map(link => (
-                <span>
-                  <strong> {link.name} </strong>: {link.url}
-                </span>
-              ))}
-            </p>
-          )}
-        </div>
-      )}
     </div>
   );
 };
