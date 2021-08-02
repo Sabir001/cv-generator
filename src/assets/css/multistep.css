@@ -1,0 +1,259 @@
+.cf-steps button {
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    line-height: 1em;
+}
+
+.important_links {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+.important_links * {
+    margin-right: 15px;
+}
+
+.important_links input, 
+.important_links button {
+    margin-bottom: 0;
+}
+
+.important_links label {
+    font-size: .8em;
+}
+
+.important_links button {
+    padding: 10px;
+    line-height: 1;
+    color: #ff0202;
+    text-transform: uppercase;
+    border-color: #ff0202;
+    text-align: center;
+    margin-right: 0;
+}
+
+.cf-steps .addlink {
+  text-align: left;
+  margin-left: 200px;
+}
+
+.cf-steps .addlink button {
+  font-size: 1em;
+  padding: 12px;
+  line-height: 1;
+  color: #42aa74;
+  text-transform: uppercase;
+  border-color: #42aa74;
+  text-align: center;
+  margin-right: 0;
+}
+
+/*--------------------------------------------------------*/
+ol.progtrckr {
+    margin: 0;
+    padding-bottom: 2.2rem;
+    list-style-type: none;
+  }
+  ol.progtrckr li {
+      position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 4rem;
+    padding: 0;
+    cursor: pointer;
+  }
+  ol.progtrckr li span {
+    padding: 0 20px;
+  }
+  @media (max-width: 650px) {
+    .progtrckr li span {
+      display: none;
+    }
+  }
+  .progtrckr em {
+    display: none;
+    font-weight: 700;
+    padding-left: 1rem;
+  }
+  @media (max-width: 650px) {
+    .progtrckr em {
+      display: inline;
+    }
+  }
+  
+  ol.progtrckr li.progtrckr-todo {
+    color: silver;
+    border-bottom: 4px solid silver;
+  }
+  ol.progtrckr li.progtrckr-doing {
+    color: black;
+    border-bottom: 4px solid #42aa74;
+  }
+  ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid #42aa74;
+  }
+  ol.progtrckr li:after {
+    content: "\00a0\00a0";
+  }
+  ol.progtrckr li:before {
+    position: absolute;
+    top: 100%;
+    margin-top: -9px;
+    float: left;
+    left: 50%;
+    margin-left: -10px;
+  }
+  ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    width: 20px;
+    line-height: 20px;
+  }
+  ol.progtrckr li.progtrckr-todo:hover:before {
+    color: #0FA0CE;
+  }
+  
+  ol.progtrckr li.progtrckr-doing:before {
+    content: "\2022";
+    color: white;
+    background-color: #42aa74;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+  }
+  ol.progtrckr li.progtrckr-doing:hover:before {
+    color: #0FA0CE;
+  }
+  
+  ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: #42aa74;
+    width: 1.2em;
+    line-height: 1.2em;
+    border-radius: 1.2em;
+  }
+  ol.progtrckr li.progtrckr-done:hover:before {
+    color: #0FA0CE;
+  }
+
+  /* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    max-width: 320px;
+    height: 38px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box; }
+    /* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
+textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px; 
+}
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #42aa74;
+    outline: 0; 
+}
+label,
+legend {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 600; 
+}
+fieldset {
+    padding: 0;
+    border-width: 0; 
+}
+input[type="checkbox"],
+input[type="radio"] {
+    isplay: inline; 
+}
+label > .label-body {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: normal; 
+}
+
+
+/* Lists
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul {
+  list-style: circle inside; }
+ol {
+  list-style: decimal inside; }
+ol, ul {
+  padding-left: 0;
+  margin-top: 0; }
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 1.5rem 0 1.5rem 3rem;
+  font-size: 90%; }
+li {
+  margin-bottom: 1rem; }
+
+
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input,
+textarea,
+select,
+fieldset {
+  margin-bottom: .5em; 
+}

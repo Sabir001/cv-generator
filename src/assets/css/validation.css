@@ -1,0 +1,28 @@
+.errors ul li {
+    font-size: .75em;
+    line-height: 1;
+    margin-bottom: .5em;
+    color: #ff0c0c;
+}
+.form-item {
+    margin-bottom: 1em;
+}
+.submit_button {
+    text-align: right;
+}
+.submit_button .button {
+    background-color: #42aa74;
+    color: #fff;
+    font-size: .8em;
+    border: 2px solid #42aa74;
+}
+.submit_button .button:hover {
+    background-color: transparent;
+    color: #42aa74;
+}
+.step-buttons {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
