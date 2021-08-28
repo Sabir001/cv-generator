@@ -1,0 +1,6 @@
+@mixin transition($for: all, $duration: 0.3s, $type: ease-in-out, $delay: 0s) {
+  transition: $for $duration $type $delay;
+}
+@mixin transition-properties($for...) {
+  transition-property: $for;
+}

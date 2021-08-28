@@ -1,0 +1,111 @@
+// opacity
+$alert-opacity: 0.1;
+$shadow-opacity: 0.3;
+
+// border-radius
+$b-radius-1: 3px;
+$b-radius-2: 5px;
+$b-radius-3: 10px;
+$b-radius-4: 15px;
+$b-radius-5: 20px;
+$b-radius-50: 50px;
+$b-radius-100: 100%;
+
+// color
+$primary: #5453fd !default;
+$secondary: #6d7c90 !default;
+$success: #2bcf81 !default;
+$danger: #ff7a8e !default;
+$info: #00b2fc !default;
+$warning: #ffb45a !default;
+$love: #ff4a9e !default;
+$dark: #191843 !default;
+$light: #f7f8ff !default;
+$white: #fff !default;
+$black: #20292f !default;
+$border-color: #ecf0f7 !default;
+$footer-text-color: #ccc6e8 !default;
+
+// template color
+$template-color: #3c1871;
+
+// theme-color
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    'template__color': $template-color,
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'danger': $danger,
+    'info': $info,
+    'warning': $warning,
+    'love': $love,
+    'dark': $dark,
+    'light': $light,
+    'white': $white,
+    'black': $black,
+    'borderColor': $border-color,
+    'footerTextColor': $footer-text-color,
+  ),
+  $theme-colors
+);
+
+$spacers: (
+  '0': (
+    x: 0,
+    y: 0,
+  ),
+  '0_5': (
+    x: calc(0.5 * var(--base-spacer-x)),
+    y: calc(0.5 * var(--base-spacer-x)),
+  ),
+  '1': (
+    x: calc(1 * var(--base-spacer-x)),
+    y: calc(1 * var(--base-spacer-x)),
+  ),
+  '1_5': (
+    x: calc(1.5 * var(--base-spacer-x)),
+    y: calc(1.5 * var(--base-spacer-x)),
+  ),
+  '2': (
+    x: calc(2 * var(--base-spacer-x)),
+    y: calc(2 * var(--base-spacer-y)),
+  ),
+  '2_5': (
+    x: calc(2.5 * var(--base-spacer-x)),
+    y: calc(2.5 * var(--base-spacer-y)),
+  ),
+  '3': (
+    x: calc(3 * var(--base-spacer-x)),
+    y: calc(3 * var(--base-spacer-y)),
+  ),
+  '3_5': (
+    x: calc(3.5 * var(--base-spacer-x)),
+    y: calc(3.5 * var(--base-spacer-y)),
+  ),
+  '4': (
+    x: calc(4 * var(--base-spacer-x)),
+    y: calc(4 * var(--base-spacer-x)),
+  ),
+  '5': (
+    x: calc(5 * var(--base-spacer-x)),
+    y: calc(5 * var(--base-spacer-x)),
+  ),
+);
+
+// theme
+
+$theme: (
+  primary: #6072ff,
+  secondary: #fa9196,
+  title: #031d3c,
+  text: #a460c1,
+  bg: #f8fafd,
+  gColor: #5d4fff,
+  white: #fff,
+  grey: #7f8995,
+  darkGrey: #67768c,
+  whiteLight: rgba(255, 255, 255, 0.1),
+  whiteDark: rgba(255, 255, 255, 0.2),
+);

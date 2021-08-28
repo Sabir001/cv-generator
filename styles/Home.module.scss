@@ -1,0 +1,9 @@
+@import "common/common";
+
+
+.container {
+    padding: 200px;
+    @include respond-below(1200px) {
+        background: #c00000;
+    }
+}
