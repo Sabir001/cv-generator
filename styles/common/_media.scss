@@ -8,7 +8,7 @@ $breakpoints: (
   xxl: 1601px,
 );
 
-@function valid-unit-check($breakpoint) {
+@function get-valid-unit($breakpoint) {
   $breakpoint: inspect($breakpoint);
   // all available unit could be use.
   $units: px, em, rem, vh, vw;
@@ -42,20 +42,17 @@ $breakpoints: (
     @media (min-width: $breakpoint-value) {
       @content;
     }
-    // If the breakpoint doesn't exist in the map.
-  } @else {
-    // If the breakpoint contain a valid unit.
-    @if valid-unit-check($breakpoint) {
-      // Write the media query.
-      @media (min-width: $breakpoint) {
-        @content;
-      }
+    // If the breakpoint doesn't exist in the map and If the breakpoint contain a valid unit.
+  } @else if get-valid-unit($breakpoint) {
+    // Write the media query.
+    @media (min-width: $breakpoint) {
+      @content;
     }
-    // If the breakpoint doesn't contain a valid unit.
-    @else {
-      // Log a error.
-      @error 'Invalid breakpoint: #{$breakpoint}.';
-    }
+  }
+  // If the breakpoint doesn't contain a valid unit.
+  @else {
+    // Log a error.
+    @error 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
@@ -71,20 +68,17 @@ $breakpoints: (
     @media (max-width: ($breakpoint-value - 0.02)) {
       @content;
     }
-    // If the breakpoint doesn't exist in the map.
-  } @else {
-    // If the breakpoint contain a valid unit.
-    @if valid-unit-check($breakpoint) {
-      // Write the media query.
-      @media (max-width: ($breakpoint - 0.02)) {
-        @content;
-      }
+    // If the breakpoint doesn't exist in the map and If the breakpoint contain a valid unit.
+  } @else if get-valid-unit($breakpoint) {
+    // Write the media query.
+    @media (max-width: ($breakpoint - 0.02)) {
+      @content;
     }
-    // If the breakpoint doesn't contain a valid unit.
-    @else {
-      // Log a error.
-      @error 'Invalid breakpoint: #{$breakpoint}.';
-    }
+  }
+  // If the breakpoint doesn't contain a valid unit.
+  @else {
+    // Log a error.
+    @error 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
@@ -103,19 +97,19 @@ $breakpoints: (
       @content;
     }
     // If one or both of the breakpoints don't exist.
-  } @else if valid-unit-check($lower) and valid-unit-check($upper) {
+  } @else if get-valid-unit($lower) and get-valid-unit($upper) {
     // Write the media query.
     @media (min-width: $lower) and (max-width: ($upper - 0.02)) {
       @content;
     }
   } @else {
     // If lower breakpoint is invalid.
-    @if (map-has-key($breakpoints, $lower) == false) {
+    @if (map-has-key($breakpoints, $lower) == false) and (get-valid-unit($lower) == false) {
       // Log a error.
       @error 'Your lower breakpoint was invalid: #{$lower}.';
     }
     // If upper breakpoint is invalid.
-    @if (map-has-key($breakpoints, $upper) == false) {
+    @if (map-has-key($breakpoints, $upper) == false) and (get-valid-unit($upper) == false) {
       // Log a error.
       @error 'Your upper breakpoint was invalid: #{$upper}.';
     }

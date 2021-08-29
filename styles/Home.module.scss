@@ -3,7 +3,7 @@
 
 .container {
     padding: 200px;
-    @include respond-below(1200px) {
+    @include respond-between(1200px, 1500px) {
         background: #c00000;
     }
 }
