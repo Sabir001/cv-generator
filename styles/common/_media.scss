@@ -7,11 +7,12 @@ $breakpoints: (
   xl: 1400px,
   xxl: 1601px,
 );
+// all available unit could be use.
+$units: px, em, rem, vh, vw;
 
+// check unit valid or not
 @function get-valid-unit($breakpoint) {
   $breakpoint: inspect($breakpoint);
-  // all available unit could be use.
-  $units: px, em, rem, vh, vw;
   // default result
   $result : false;
   // loop the units and check each
@@ -28,7 +29,6 @@ $breakpoints: (
   }
   @return $result;
 }
-
 
 //
 //  RESPOND ABOVE
@@ -55,7 +55,6 @@ $breakpoints: (
     @error 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
-
 
 //
 //  RESPOND BELOW
