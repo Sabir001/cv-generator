@@ -2,8 +2,30 @@
 
 
 .container {
-    padding: 200px;
-    @include respond-between(1200px, 1500px) {
-        background: #c00000;
+    padding: 100px;
+    background: #c4c4c4;
+}
+
+.colorViewerWrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 50px;
+    .colorViewer {
+        padding-top: 60%;
+        &.background{
+            background-color: var(--bg);
+        }
+        &.color{
+            background-color: var(--color);
+        }
+        &.secondary{
+            background-color: var(--secondary);
+        }
+        &.success{
+            background-color: var(--success);
+        }
+        &.danger{
+            background-color: var(--danger);
+        }
     }
 }
