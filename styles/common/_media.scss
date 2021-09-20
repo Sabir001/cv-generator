@@ -1,3 +1,4 @@
+@use "sass:math";
 // A map of breakpoints.
 $breakpoints: (
   xs: 480px,
@@ -12,19 +13,15 @@ $units: px, em, rem, vh, vw;
 
 // check unit valid or not
 @function get-valid-unit($breakpoint) {
-  $breakpoint: inspect($breakpoint);
   // default result
-  $result : false;
+  $result: false;
   // loop the units and check each
   @each $unit in $units {
     // if breakpoint contain valid unit return true
-    @if (str-index($breakpoint, $unit)){
+    @if (math.unit($breakpoint) == $unit) {
       $result: true;
-    } @else {
-      // if breakpoint contain invalid unit return false
-      @if not ($result) {
-        $result: false;
-      }
+    } @else if not ($result) {
+      $result: false;
     }
   }
   @return $result;
@@ -104,12 +101,16 @@ $units: px, em, rem, vh, vw;
     }
   } @else {
     // If lower breakpoint is invalid.
-    @if (map-has-key($breakpoints, $lower) == false) and (get-valid-unit($lower) == false) {
+    @if (map-has-key($breakpoints, $lower) == false) and
+      (get-valid-unit($lower) == false)
+    {
       // Log a error.
       @error 'Your lower breakpoint was invalid: #{$lower}.';
     }
     // If upper breakpoint is invalid.
-    @if (map-has-key($breakpoints, $upper) == false) and (get-valid-unit($upper) == false) {
+    @if (map-has-key($breakpoints, $upper) == false) and
+      (get-valid-unit($upper) == false)
+    {
       // Log a error.
       @error 'Your upper breakpoint was invalid: #{$upper}.';
     }
