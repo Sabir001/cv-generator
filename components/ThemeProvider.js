@@ -1,59 +1,59 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from "react";
+import validateColor from "validate-color";
 
 function ThemeProvider() {
-    const [mount, setMount] = useState(false);
-    const dom = useRef(null)
-    const [rootColors, setRootColors] = useState([])
+  const [mount, setMount] = useState(false);
+  const dom = useRef(null);
+  const [rootColors, setRootColors] = useState([]);
 
-    const baseColors = {
-        'Background':'--bg',
-        'Foreground':'--color',
-        'Secondary':'--secondary',
-        'Success':'--success',
-        'Danger':'--danger',
-    }
-    
-    useEffect(() => {
-      dom.current = document.documentElement;
-      const getColors = {}
-      Object.entries(baseColors).map(([key, value]) => {
-        getColors[key] = getComputedStyle(dom.current).getPropertyValue(value).trim()
-      })
-      setRootColors(getColors)
-      setMount(true)
-    }, [])
-    // console.log(rootColors)
-  
-    const getChangeColor = (e, key) => {
-      const setColor = {...rootColors}
-      setColor[key] = e.target.value
-      setRootColors(setColor);
-    }
-  
-    console.log(rootColors)
-    useEffect(() => {
-      Object.entries(baseColors).map(([key, value]) => {
-        dom.current.style.setProperty(value, rootColors[key])
-      })
-    }, [rootColors])
-    
-    if (!mount) return null;
-    
-    return (
-      <div>
-        {Object.entries(rootColors).map(( [key, value], index ) => {
-          return (
-            <span key={index}>
-            <input 
+  const baseColors = {
+    Background: "--bg",
+    Foreground: "--color",
+    Secondary: "--secondary",
+    Success: "--success",
+    Danger: "--danger",
+  };
+
+  useEffect(() => {
+    dom.current = document;
+    const getColors = {};
+    Object.entries(baseColors).map(([key, value]) => {
+      let color = getComputedStyle(dom.current.documentElement)
+        .getPropertyValue(value)
+        .trim();
+      getColors[value] = color && validateColor(color) ? color : "transparent";
+    });
+    setRootColors(getColors);
+    setMount(true);
+  }, []);
+  useEffect(() => {
+    Object.entries(rootColors).map(([key, value]) => {
+      dom.current.documentElement.style.setProperty(key, value);
+    });
+  }, [rootColors]);
+
+  const getChangeColor = (e, key) => {
+    const setColor = { ...rootColors };
+    setColor[key] = e.target.value;
+    setRootColors(setColor);
+  };
+
+  if (!mount) return null;
+  return (
+    <div>
+      {Object.entries(rootColors).map(([key, value], index) => {
+        return (
+          <span key={index}>
+            <input
               type="color"
-              defaultValue = {value}
-              onChange = {(e) => getChangeColor(e, key)}
+              defaultValue={value}
+              onChange={(e) => getChangeColor(e, key)}
             />
           </span>
-          )
-        })}
-      </div>
-    )
+        );
+      })}
+    </div>
+  );
 }
 
 export default ThemeProvider;
